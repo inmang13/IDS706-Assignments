@@ -1,1 +1,8 @@
 pytest
+pandas
+polars
+numpy
+matplotlib
+scikit-learn
+xgboost
+jupyter

@@ -1,9 +1,9 @@
-# IDS706-Assignment-1
-[![Python tests](https://github.com/inmang13/IDS706-Assignment-1/actions/workflows/test.yml/badge.svg)](https://github.com/inmang13/IDS706-Assignment-1/actions/workflows/test.yml)
+# IDS706-Assignments
+[![Python tests](https://github.com/inmang13/IDS706-Assignments/actions/workflows/test.yml/badge.svg)](https://github.com/inmang13/IDS706-Assignments/actions/workflows/test.yml)
 
 ## Project Description
 
-This project was built and used as a small Python data engineering demonstration. It provides a simple command-line application that welcomes a user by name and includes automated tests, Docker support, and continuous integration with GitHub Actions.
+Grace's Repo for IDS 607 Data Engineering System Assignments
 
 ## Project Structure
 
@@ -12,6 +12,7 @@ This project was built and used as a small Python data engineering demonstration
 - `Dockerfile` - container configuration
 - `Makefile` - common development commands
 - `.github/workflows/test.yml` - GitHub Actions workflow
+- `notebooks/basic_analysis.ipynb` - streamflow data analysis and forecasting notebook
 
 ## Installation
 
@@ -83,6 +84,7 @@ To run the tests inside the container:
 make docker-test
 ```
 
-## Notes and Next Steps
+## Notebooks
 
-This is intentionally a simple starter project. Potential next steps include adding more application functionality, expanding test coverage, pinning dependency versions, and adding data ingestion or transformation examples.
+`notebooks/basic_analysis.ipynb` analyzes USGS daily mean discharge data (Eno River at Hillsborough, NC, 2010-2020). Covers data cleaning, monthly/seasonal/yearly flow statistics, boxplot visualizations, and a next-day flow forecast comparing XGBoost and Random Forest models on lag/rolling/calendar features.
+
