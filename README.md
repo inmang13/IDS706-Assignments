@@ -68,6 +68,8 @@ make test
 
 The GitHub Actions workflow runs the tests, builds the Docker image, and runs the test suite inside Docker for every push and pull request.
 
+![All tests passing on GitHub Actions](docs/screenshots/tests-passing.png)
+
 ## Docker
 
 Make sure Docker Desktop is running, then build and run the application:
