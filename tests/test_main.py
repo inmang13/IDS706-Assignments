@@ -133,9 +133,11 @@ def test_split_train_test_no_leakage_and_chronological(clean_df):
     # no train timestamp is >= split_date
     assert (X_train.index < split_date).all()
     assert (X_test.index >= split_date).all()
+    assert (feat.set_index("time").loc[X_train.index, "target_time"] < split_date).all()
     # leak-prone columns absent from X
     assert "value" not in X_train.columns
     assert "target_flow" not in X_train.columns
+    assert "target_time" not in X_train.columns
 
 
 def test_split_train_test_split_past_end_gives_empty_test(clean_df):

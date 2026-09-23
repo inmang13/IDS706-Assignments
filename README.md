@@ -9,6 +9,14 @@ discharge data for the Eno River, NC (2010-2020) — clean data, engineer
 lag/rolling/calendar features, train a Random Forest, evaluate (RMSE,
 NSE), and plot results.
 
+### Problem Statement
+
+Reliable next-day streamflow forecasts can help monitor river conditions and
+identify unusually high-flow events. This project uses historical USGS
+measurements from the Eno River at Hillsborough, NC, to clean daily discharge
+data, engineer lag and rolling features, and evaluate a Random Forest model
+for next-day streamflow prediction.
+
 ## Project Structure
 
 - `src/main.py` - streamflow pipeline: load, clean, summarize, feature engineering, model training/evaluation, plotting
@@ -76,6 +84,20 @@ make lint
 The GitHub Actions workflow runs the tests, builds the Docker image, and runs the test suite inside Docker for every push and pull request.
 
 ![All tests passing on GitHub Actions](docs/screenshots/tests-passing.png)
+
+## Refactoring Overview
+
+The analysis was refactored from notebook-focused code into reusable functions
+in `src/main.py`. The pipeline now separates data loading, cleaning,
+summarization, feature engineering, model training, evaluation, and plotting.
+This makes the workflow easier to test, reuse locally or in Docker, and run in
+CI without relying on notebook state.
+
+The refactoring also added a repository-relative data path, chronological
+train/test splitting, seeded model training, headless plotting for CI, and
+explicit data-quality reporting. The changes were verified with the automated
+test suite, Black formatting, Flake8 linting, local pipeline execution, and
+Docker-based tests.
 
 ## Docker
 

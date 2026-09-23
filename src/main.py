@@ -147,6 +147,7 @@ def create_features(df, target_col="value"):
 
     # Target: Flow 1-day into the future
     df_feat["target_flow"] = df_feat[target_col].shift(-1)
+    df_feat["target_time"] = pd.Series(df_feat.index, index=df_feat.index).shift(-1)
 
     # 2. Lags and rolling statistics (short and seasonal memory)
     lagged = df_feat[target_col].shift(1)
@@ -199,7 +200,7 @@ def split_train_test(df, split_date=None, target_col="target_flow"):
     else:
         split_date = pd.Timestamp(split_date)
 
-    train = df[df.index < split_date]
+    train = df[(df.index < split_date) & (df["target_time"] < split_date)]
     test = df[df.index >= split_date]
 
     print(
@@ -207,7 +208,9 @@ def split_train_test(df, split_date=None, target_col="target_flow"):
         f"({len(train)} train rows, {len(test)} test rows)"
     )
 
-    feature_cols = [c for c in df.columns if c not in (target_col, "value")]
+    feature_cols = [
+        c for c in df.columns if c not in (target_col, "target_time", "value")
+    ]
 
     X_train, y_train = train[feature_cols], train[target_col]
     X_test, y_test = test[feature_cols], test[target_col]
