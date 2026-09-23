@@ -18,7 +18,7 @@ NSE), and plot results.
 - `Dockerfile` - container configuration
 - `Makefile` - common development commands
 - `.github/workflows/test.yml` - GitHub Actions workflow
-- `notebooks/basic_analysis.ipynb` - streamflow data analysis and forecasting notebook
+- `notebooks/draft_analysis.ipynb` - draft streamflow data analysis and forecasting notebook
 - `notebooks/rust_vs_python_intro.ipynb` - Rust primer for Python users (requires a Rust Jupyter kernel)
 
 ## Installation
@@ -66,6 +66,13 @@ Or:
 make test
 ```
 
+Check formatting and linting locally with:
+
+```bash
+make format-check
+make lint
+```
+
 The GitHub Actions workflow runs the tests, builds the Docker image, and runs the test suite inside Docker for every push and pull request.
 
 ![All tests passing on GitHub Actions](docs/screenshots/tests-passing.png)
@@ -87,7 +94,7 @@ make docker-test
 
 ## Notebooks
 
-`notebooks/basic_analysis.ipynb` analyzes USGS daily mean discharge data (Eno River at Hillsborough, NC, 2010-2020). Covers data cleaning, monthly/seasonal/yearly flow statistics, boxplot visualizations, and a next-day flow forecast comparing XGBoost and Random Forest models on lag/rolling/calendar features.
+`notebooks/draft_analysis.ipynb` analyzes USGS daily mean discharge data (Eno River at Hillsborough, NC, 2010-2020). Covers data cleaning, monthly/seasonal/yearly flow statistics, boxplot visualizations, and a next-day flow forecast comparing XGBoost and Random Forest models on lag/rolling/calendar features.
 
 `notebooks/rust_vs_python_intro.ipynb` introduces Rust from a Python starting point, motivated by the Rust engines behind fast Python tools such as Polars. Covers the parts that look familiar (variables, conditions, loops), then move semantics, ownership, and borrowing, including a mutation bug Python runs happily and Rust rejects at compile time. Runs on a Rust Jupyter kernel rather than Python; a few cells are meant to fail to compile.
 

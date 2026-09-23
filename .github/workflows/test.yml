@@ -21,6 +21,12 @@ jobs:
       - name: Install dependencies
         run: make install
 
+      - name: Check formatting
+        run: make format-check
+
+      - name: Run lint checks
+        run: make lint
+
       - name: Run tests
         run: make test
 

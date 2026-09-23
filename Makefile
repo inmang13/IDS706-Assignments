@@ -1,4 +1,4 @@
-.PHONY: install test run docker-build docker-run docker-test clean
+.PHONY: install test format format-check lint run docker-build docker-run docker-test clean
 
 IMAGE_NAME := data-engineering-demo
 
@@ -9,6 +9,18 @@ install:
 # Run tests
 test:
 	python -m pytest -q
+
+# Format Python source and tests
+format:
+	python -m black src tests
+
+# Verify formatting without changing files
+format-check:
+	python -m black --check src tests
+
+# Run static style checks
+lint:
+	python -m flake8 src tests
 
 # Run the application
 run:

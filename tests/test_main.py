@@ -27,11 +27,13 @@ from src.main import (
 def raw_flow_df():
     """Small raw frame shaped like the USGS CSV: dupes, a non-Approved
     row, and a string 'value' to exercise clean_flow_data's coercions."""
-    return pd.DataFrame({
-        "time": ["2020-01-01", "2020-01-02", "2020-01-02", "2020-01-03"],
-        "value": ["10.0", "20.0", "20.0", "30.0"],
-        "approval_status": ["Approved", "Approved", "Approved", "Provisional"],
-    })
+    return pd.DataFrame(
+        {
+            "time": ["2020-01-01", "2020-01-02", "2020-01-02", "2020-01-03"],
+            "value": ["10.0", "20.0", "20.0", "30.0"],
+            "approval_status": ["Approved", "Approved", "Approved", "Provisional"],
+        }
+    )
 
 
 @pytest.fixture
@@ -198,7 +200,9 @@ def test_plot_yearly_stats_saves_file(tmp_path, clean_df):
 def test_plot_flow_boxplot_saves_file(tmp_path, clean_df):
     flow_stats = summarize_flow(clean_df)
 
-    out_path = plot_flow_boxplot(flow_stats["calendar_df"], "month", output_dir=tmp_path)
+    out_path = plot_flow_boxplot(
+        flow_stats["calendar_df"], "month", output_dir=tmp_path
+    )
 
     assert out_path.exists()
     assert out_path.stat().st_size > 0
