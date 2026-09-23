@@ -1,5 +1,5 @@
 # IDS706-Assignments
-[![Python tests](https://github.com/inmang13/IDS706-Assignments/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/inmang13/IDS706-Assignments/actions/workflows/test.yml)
+[![Python tests](https://github.com/inmang13/IDS706_stream_prediction_mini/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/inmang13/IDS706_stream_prediction_mini/actions/workflows/test.yml)
 
 ## Project Description
 
@@ -121,6 +121,8 @@ train/test splitting, seeded model training, headless plotting for CI, and
 explicit data-quality reporting. The changes were verified with the automated
 test suite, Black formatting, Flake8 linting, local pipeline execution, and
 Docker-based tests.
+
+![Refactoring commit diff](docs/screenshots/refactoring-diff.png)
 
 ## Docker
 
