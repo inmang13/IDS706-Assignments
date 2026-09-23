@@ -92,6 +92,20 @@ To run the tests inside the container:
 make docker-test
 ```
 
+### Docker Evidence
+
+Successful image build and image listing:
+
+![Docker image build](docs/screenshots/docker-build.png)
+
+Application running successfully in a container:
+
+![Docker application run](docs/screenshots/docker-run.png)
+
+Tests passing inside the container:
+
+![Docker tests passing](docs/screenshots/docker-tests.png)
+
 ## Notebooks
 
 `notebooks/draft_analysis.ipynb` analyzes USGS daily mean discharge data (Eno River at Hillsborough, NC, 2010-2020). Covers data cleaning, monthly/seasonal/yearly flow statistics, boxplot visualizations, and a next-day flow forecast comparing XGBoost and Random Forest models on lag/rolling/calendar features.

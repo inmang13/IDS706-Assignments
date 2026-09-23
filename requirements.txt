@@ -2,9 +2,7 @@ pytest
 black>=24,<26
 flake8>=7,<8
 pandas
-polars
 numpy
 matplotlib
 scikit-learn
-xgboost
 jupyter

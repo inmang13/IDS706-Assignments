@@ -1,6 +1,6 @@
 .PHONY: install test format format-check lint run docker-build docker-run docker-test clean
 
-IMAGE_NAME := data-engineering-demo
+IMAGE_NAME := stream_prediction
 
 # Install dependencies
 install:
