@@ -83,6 +83,34 @@ def test_clean_flow_data_empty_input_returns_empty_frame():
     assert list(cleaned.columns) == ["time", "value"]
 
 
+def test_clean_flow_data_drops_invalid_values_and_keeps_last_timestamp():
+    raw = pd.DataFrame(
+        {
+            "time": ["2020-01-01", "2020-01-02", "2020-01-02"],
+            "value": ["10.0", "not-a-number", "25.0"],
+            "approval_status": ["Approved", "Approved", "Approved"],
+        }
+    )
+
+    cleaned = clean_flow_data(raw)
+
+    assert cleaned["value"].tolist() == [10.0, 25.0]
+    assert cleaned["time"].is_unique
+
+
+def test_clean_flow_data_rejects_missing_calendar_days():
+    raw = pd.DataFrame(
+        {
+            "time": ["2020-01-01", "2020-01-03"],
+            "value": [10.0, 30.0],
+            "approval_status": ["Approved", "Approved"],
+        }
+    )
+
+    with pytest.raises(ValueError, match="missing calendar day"):
+        clean_flow_data(raw)
+
+
 # ---------------------------------------------------------------------
 # 3. Feature engineering
 # ---------------------------------------------------------------------
@@ -157,6 +185,15 @@ def test_nash_sutcliffe_efficiency_perfect_and_mean_baseline():
 
     mean_pred = np.full_like(y_true, y_true.mean())
     assert nash_sutcliffe_efficiency(y_true, mean_pred) == pytest.approx(0.0)
+
+
+def test_nash_sutcliffe_efficiency_constant_observations():
+    y_true = np.array([10.0, 10.0, 10.0])
+
+    assert nash_sutcliffe_efficiency(y_true, y_true) == pytest.approx(1.0)
+
+    with pytest.raises(ValueError, match="zero variance"):
+        nash_sutcliffe_efficiency(y_true, np.array([9.0, 10.0, 11.0]))
 
 
 def test_evaluate_model_returns_finite_metrics(clean_df):

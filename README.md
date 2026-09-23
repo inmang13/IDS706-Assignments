@@ -17,6 +17,16 @@ measurements from the Eno River at Hillsborough, NC, to clean daily discharge
 data, engineer lag and rolling features, and evaluate a Random Forest model
 for next-day streamflow prediction.
 
+### Data Quality and Modeling Decisions
+
+The pipeline keeps approved USGS observations, converts discharge values to
+numeric form, drops invalid values, and keeps the last record when duplicate
+timestamps occur. It requires consecutive daily observations so lag features
+always refer to the previous calendar day; missing dates cause the pipeline to
+stop rather than silently fabricate measurements. Extreme flow values are
+retained as meaningful flood observations, while the model uses a `log1p`
+target transformation to reduce the influence of heavy-tailed values.
+
 ## Project Structure
 
 - `src/main.py` - streamflow pipeline: load, clean, summarize, feature engineering, model training/evaluation, plotting

@@ -57,10 +57,11 @@ def clean_flow_data(df):
     df["value"] = pd.to_numeric(df["value"], errors="coerce")
     df = df[["time", "value"]]
 
-    n_na = df["value"].isna().sum()
-    n_dupes = df.duplicated().sum()
+    n_invalid = df["value"].isna().sum()
+    n_duplicate_timestamps = df.duplicated(subset=["time"]).sum()
 
-    df = df.drop_duplicates()
+    df = df.dropna(subset=["time", "value"])
+    df = df.drop_duplicates(subset=["time"], keep="last")
     df = df.sort_values("time").reset_index(drop=True)
 
     if df.empty:
@@ -70,9 +71,16 @@ def clean_flow_data(df):
         n_missing_days = len(expected_days.difference(df["time"]))
 
     print(
-        f"clean_flow_data: {n_na} NA value(s), {n_dupes} duplicate row(s), "
+        f"clean_flow_data: {n_invalid} invalid value(s), "
+        f"{n_duplicate_timestamps} duplicate timestamp(s), "
         f"{n_missing_days} missing day(s)"
     )
+
+    if n_missing_days:
+        raise ValueError(
+            "clean_flow_data requires consecutive daily observations; "
+            f"found {n_missing_days} missing calendar day(s)"
+        )
 
     return df
 
@@ -254,9 +262,12 @@ def train_model(X_train, y_train, random_state=42):
 
 def nash_sutcliffe_efficiency(y_true, y_pred):
     """NSE: 1.0 is perfect, 0.0 is no better than predicting the mean."""
-    return 1 - (
-        np.sum((y_true - y_pred) ** 2) / np.sum((y_true - np.mean(y_true)) ** 2)
-    )
+    denominator = np.sum((y_true - np.mean(y_true)) ** 2)
+    if np.isclose(denominator, 0):
+        if np.allclose(y_true, y_pred):
+            return 1.0
+        raise ValueError("NSE is undefined when observations have zero variance")
+    return 1 - (np.sum((y_true - y_pred) ** 2) / denominator)
 
 
 def evaluate_model(model, X_test, y_test):

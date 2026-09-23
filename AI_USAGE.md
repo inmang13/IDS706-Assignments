@@ -30,5 +30,6 @@ understanding.
 | `Dockerfile` | Claude (Sonnet 5, via Claude Code) | Found that `data/` was never copied into the image, which would fail `make docker-test` in CI, and added the missing `COPY data ./data` line. | Confirmed that the container needs the checked-in CSV because `src/main.py` loads it through its repository-relative default path during the test and pipeline run. |
 | `notebooks/draft_analysis.ipynb`, `requirements.txt`, `Makefile`, `.github/workflows/test.yml` | GitHub Copilot | Renamed the analysis notebook to mark it as a draft, added Black and Flake8 commands, and added formatting/lint checks to CI. | Notebook contents were not edited. Verified that Black and Flake8 pass and that all 14 tests pass in the configured workspace environment.|
 | `README.md` | GitHub Copilot | Drafted a concise refactoring overview for the assignment documentation. | Reviewed the section to confirm it describes the existing pipeline structure and verified checks without adding unsupported claims. |
+| `src/main.py`, `tests/test_main.py`, `README.md` | GitHub Copilot | Applied code-review recommendations for invalid values, duplicate timestamps, missing calendar days, and zero-variance NSE behavior. | Added focused edge-case tests and documented the resulting data-quality and modeling policies. |
 
 
