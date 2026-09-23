@@ -149,7 +149,6 @@ def create_features(df, target_col="value"):
     Remember the leakage rule: every rolling stat is computed on
     df[target_col].shift(1), never on the current day.
     """
-    np.random.seed(42)
     df = df.set_index("time")
     df_feat = df[[target_col]].copy()
 
@@ -499,7 +498,7 @@ def run_pipeline(path=DEFAULT_DATA_PATH, split_date=None):
     )
 
     importances = feature_importance(model, X_train.columns)
-    print("Top 10 features:")
+    print("Top 5 features:")
     print(importances.head(5).to_string())
 
     return metrics

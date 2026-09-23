@@ -31,5 +31,6 @@ understanding.
 | `notebooks/draft_analysis.ipynb`, `requirements.txt`, `Makefile`, `.github/workflows/test.yml` | GitHub Copilot | Renamed the analysis notebook to mark it as a draft, added Black and Flake8 commands, and added formatting/lint checks to CI. | Notebook contents were not edited. Verified that Black and Flake8 pass and that all 14 tests pass in the configured workspace environment.|
 | `README.md` | GitHub Copilot | Drafted a concise refactoring overview for the assignment documentation. | Reviewed the section to confirm it describes the existing pipeline structure and verified checks without adding unsupported claims. |
 | `src/main.py`, `tests/test_main.py`, `README.md` | GitHub Copilot | Applied code-review recommendations for invalid values, duplicate timestamps, missing calendar days, and zero-variance NSE behavior. | Added focused edge-case tests and documented the resulting data-quality and modeling policies. |
+| `src/main.py`, `README.md`, `docs/screenshots/timeseries_predictions.png` | GitHub Copilot | Removed the unnecessary feature-engineering random seed, corrected the feature-importance output label, and added verified metrics and a tracked prediction plot to the README. | Confirmed the existing model seed remains in `train_model`, reran the pipeline, and documented the current RMSE, NSE, and Log-NSE results. |
 
 

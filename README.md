@@ -70,6 +70,19 @@ make run
 Runs the full pipeline end-to-end, prints metrics (RMSE, NSE, log-NSE),
 and saves plots to `output/`.
 
+### Verified Results
+
+The current chronological evaluation uses data from 2010-2020 and reports:
+
+- RMSE: `167.27`
+- NSE: `0.328`
+- Log-NSE: `0.793`
+
+The strongest model features are `lag_1` and `flow_diff_1`. The time-series
+comparison below shows observed and predicted next-day streamflow values.
+
+![Observed and predicted streamflow](docs/screenshots/timeseries_predictions.png)
+
 ## Running Tests
 
 Run the tests locally with:
