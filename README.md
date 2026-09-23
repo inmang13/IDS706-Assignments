@@ -1,5 +1,5 @@
 # IDS706-Assignments
-[![Python tests](https://github.com/inmang13/IDS706-Assignments/actions/workflows/test.yml/badge.svg)](https://github.com/inmang13/IDS706-Assignments/actions/workflows/test.yml)
+[![Python tests](https://github.com/inmang13/IDS706-Assignments/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/inmang13/IDS706-Assignments/actions/workflows/test.yml)
 
 ## Project Description
 
